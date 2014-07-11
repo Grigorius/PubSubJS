@@ -10,7 +10,7 @@ angular.module('myApp', ['gr.PubSub', ...])
 ```
 And inject the service into anoter service or controller or directive ...
 
-Important bit:
+####Important bit:
 ```javascript 
 $scope.$on('$destroy', function () { 
     PubSub.unsubscribe(token); 
@@ -18,6 +18,7 @@ $scope.$on('$destroy', function () {
 ```
 So you clean-up after leaving a controller or when destroyind a directive ...
 
+####Example:
 ````html
 <body ng-app="YOUR_APP" ng-controller="MainCtrl">
 </body>
