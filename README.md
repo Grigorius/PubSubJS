@@ -8,10 +8,15 @@ Add the module to your dependencies
 ```javascript
 angular.module('myApp', ['gr.PubSub', ...])
 ```
-
 And inject the service into anoter service or controller or directive ...
-The important bit is using 
-```javascript $scope.$on('$destroy', function () { PubSub.unsubscribe(token); }); ```
+
+Important bit:
+```javascript 
+$scope.$on('$destroy', function () { 
+    PubSub.unsubscribe(token); 
+}); 
+```
+So you clean-up after leaving a controller or when destroyind a directive ...
 
 ````html
 <body ng-app="YOUR_APP" ng-controller="MainCtrl">
