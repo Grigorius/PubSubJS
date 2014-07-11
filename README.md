@@ -177,34 +177,3 @@ Setting immediate exceptions in development is easy, just tell PubSubJS about it
 ```javascript
 PubSub.immediateExceptions = true;
 ```
-
-## Plugin for jQuery
-
-By default PubSubJS can be used in any browser or CommonJS environment, including [node](http://nodejs.org). Additionally, PubSubJS can be built specifically for jQuery.
-
-    $ rake jquery
-
-Produces jquery.pubsub.js
-
-### Use with jQuery
-
-```javascript
-var topic = 'greeting',
-    data = 'world'
-    subscriber = function sayHello( data ){
-        console.log( 'hello ' + data );
-    };
-
-// add a subscription
-var token = $.pubsub('subscribe', topic, subscriber );
-
-// unsubscribing
-$.pubsub('unsubscribe', token)          // remove a specific subscription
-$.pubsub('unsubscribe', subscriber);    // remove all subscriptions for subscriber
-
-// publishing a topic
-$.pubsub('publish', topic, data);
-
-// publishing topic syncronously
-$.pubsub('publishSync', topic, data);
-```
