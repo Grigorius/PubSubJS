@@ -10,6 +10,8 @@ angular.module('myApp', ['gr.PubSub', ...])
 ```
 
 And inject the service into anoter service or controller or directive ...
+The important bit is using 
+```javascript $scope.$on('$destroy', function () { PubSub.unsubscribe(token); }); ```
 
 ````html
 <body ng-app="YOUR_APP" ng-controller="MainCtrl">
@@ -23,8 +25,27 @@ And inject the service into anoter service or controller or directive ...
   angular.module('controllers', [])
     .controller('MainCtrl', ['$scope', 'PubSub', function($scope, PubSub) {
 
-      //...
+        var someMessageHandler =  function (event, queue) {
+            // ...
+        };
 
+        var someMessageToken = PubSub.subscribe('someMessage', messageHandler);
+
+        $scope.$on('$destroy', function () {
+            PubSub.unsubscribe(someMessageToken);
+        });
+
+    }])
+    .factory('someFactory', ['PubSub', function (PubSub) {
+        return {
+            notifyEvent: function (data) {
+                PubSub.publish('someMessage', data);
+            },
+            processEvent: function (someEvent) {
+                //process event
+                this.notifyEvent(processedData);
+            }
+        }
     }]);
 </script>
 
