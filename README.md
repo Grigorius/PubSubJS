@@ -1,6 +1,34 @@
 # PubSubJS
+Port of PubSub to Angular - so you can inject it as a factory:
 
-[![Build Status](https://travis-ci.org/mroderick/PubSubJS.png)](https://travis-ci.org/mroderick/PubSubJS) [![NPM version](https://badge.fury.io/js/pubsub-js.png)](http://badge.fury.io/js/pubsub-js)
+## Installation
+
+Add the module to your dependencies
+
+```javascript
+angular.module('myApp', ['gr.PubSub', ...])
+```
+
+And inject the service into anoter service or controller or directive ...
+
+````html
+<body ng-app="YOUR_APP" ng-controller="MainCtrl">
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+<script src=".../pubsub.js"></script>
+<script>
+  angular.module('YOUR_APP', [
+    'gr.PubSub',
+  ]);
+  angular.module('controllers', [])
+    .controller('MainCtrl', ['$scope', 'PubSub', function($scope, PubSub) {
+
+      //...
+
+    }]);
+</script>
+
+````
 
 PubSubJS is a [topic-based](http://en.wikipedia.org/wiki/Publish–subscribe_pattern#Message_filtering) [publish/subscribe](http://en.wikipedia.org/wiki/Publish/subscribe) library written in JavaScript.
 
@@ -24,13 +52,6 @@ PubSubJS is designed to be used within a **single process**, and is not a good c
 * Easy to understand and use (thanks to synchronization decoupling)
 * Small(ish), less than 1kb minified and gzipped
 
-## Getting PubSubJS
-
-There are several ways of getting PubSubJS
-
-* [Download a tagged version](https://github.com/mroderick/PubSubJS/tags) from GitHub
-* Install via npm (`npm install pubsub-js`)
-* Intall via bower (`bower install pubsub-js`)
 
 ## Examples
 
@@ -187,43 +208,3 @@ $.pubsub('publish', topic, data);
 // publishing topic syncronously
 $.pubsub('publishSync', topic, data);
 ```
-
-In the jQuery build, the global ```PubSub``` global is still available, so you can mix and match both ```Pubsub``` and ```$.pubsub``` as needed.
-
-There is also an article about [Using PubSubJS with jQuery](http://roderick.dk/resources/using-pubsubjs-with-jquery/)
-
-## Contributing to PubSubJS
-
-Please see [CONTRIBUTING.md](CONTRIBUTING.md)
-
-## Future of PubSubJS
-
-* Better and more extensive usage examples
-
-
-## More about Publish/Subscribe
-
-* [The Many Faces of Publish/Subscribe](http://www.cs.ru.nl/~pieter/oss/manyfaces.pdf) (PDF)
-* [Addy Osmani's mini book on Patterns](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript)
-* [Publish / Subscribe Systems, A summary of 'The Many Faces of Publish / Subscribe'](http://downloads.ohohlfeld.com/talks/hohlfeld_schroeder-publish_subscribe_systems-dsmware_eurecom2007.pdf)
-
-## Versioning
-
-PubSubJS uses [Semantic Versioning](http://semver.org/) for predictable versioning.
-
-## Changelog
-
-Please see [https://github.com/mroderick/PubSubJS/releases](https://github.com/mroderick/PubSubJS/releases)
-
-## License
-
-MIT: http://mrgnrdrck.mit-license.org
-
-## Alternatives
-
-These are a few alternative projects that also implement topic based publish subscribe in JavaScript.
-
-* http://www.joezimjs.com/projects/publish-subscribe-jquery-plugin/
-* http://amplifyjs.com/api/pubsub/
-* http://radio.uxder.com/ — oriented towards 'channels', free of dependencies
-* https://github.com/pmelander/Subtopic - supports vanilla, underscore, jQuery and is even available in NuGet
