@@ -16,7 +16,7 @@ $scope.$on('$destroy', function () {
     PubSub.unsubscribe(token); 
 }); 
 ```
-So you clean-up after leaving a controller or when destroyind a directive ...
+So you clean-up after leaving a controller or when destroying a directive ...
 
 ####Example:
 ````html
